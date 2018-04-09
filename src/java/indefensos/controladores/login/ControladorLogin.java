@@ -67,7 +67,7 @@ public class ControladorLogin implements Serializable {
             if (usuarioSesion != null && usuarioSesion.getEstado() == 1) {
                 this.documento = 0;
                 this.clave = "";
-                return "/app/index.xhtml?faces-redirect=true";
+                return "/core/index.xhtml?faces-redirect=true";
 
             } else {
                 FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_WARN, "contraseña, documento incorrecto o usuario desactivado. ", "Contacte con el administrador");
