@@ -6,9 +6,12 @@
 package indefensos.modelo.dao;
 
 import indefensos.modelo.entidades.Mascota;
+import indefensos.modelo.entidades.Usuario;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +31,12 @@ public class MascotaFacade extends AbstractFacade<Mascota> {
     public MascotaFacade() {
         super(Mascota.class);
     }
-    
+
+    public List<Mascota> listarMascotasUsuarioSesion(Usuario u) {
+        Query q = getEntityManager().createQuery("SELECT m FROM Mascota m WHERE m.dueñoId = :dueñoId", Mascota.class);
+        q.setParameter("dueñoId", u);
+        return q.getResultList();
+
+    }
+
 }

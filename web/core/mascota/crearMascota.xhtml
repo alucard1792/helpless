@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui">
+
+    <!--Nombre de la pagina-->
+    <ui:define name="pageTitle">
+
+
+    </ui:define>
+
+    <!--estilos adicionales si son necesarias-->
+    <ui:define name="firstStyle">
+    </ui:define>
+
+    <!--titulo del contenido principal-->
+    <ui:define name="mainContentTitle">
+
+
+
+    </ui:define>
+
+    <!--contenido principal de la pagina-->
+    <ui:define name="mainContent">
+        <b:messages show-detail="true" show-summary="true"></b:messages>
+
+        <h:form>
+
+            <div class="form-group">
+                <h:outputLabel value="Nombres:" for="nombres" />
+                <h:inputText class="form-control" id="nombre" value="#{controladorCrearMascota.mascota.nombre}" title="Nombre" />
+            </div>
+            <div class="form-group">
+                <h:outputLabel value="Edad:" for="edad" />
+                <h:inputText class="form-control" id="edad" value="#{controladorCrearMascota.mascota.edad}" title="Edad" />
+            </div>
+            <div class="form-group">
+                <h:outputLabel value="Descripcion:" for="descripcion" />
+                <h:inputText class="form-control" id="descripcion" value="#{controladorCrearMascota.mascota.descripcion}" title="Descripcion" />
+            </div>
+            <div class="form-group">
+                <h:outputLabel value="TipoMascota:" for="tipoMascota" />
+                <h:selectOneMenu class="form-control" id="tipoMascota" value="#{controladorCrearMascota.mascota.tipoMascota}" title="tipoMascota" required="true" requiredMessage="The tipoMascota field is required.">
+                    <f:selectItem itemValue="perro" itemLabel="perro"/>
+                    <f:selectItem itemValue="gato" itemLabel="gato"/>
+                </h:selectOneMenu>
+            </div>
+            <h:outputLabel value="CiudadesId:" for="ciudadesId" />
+            <h:selectOneMenu class="form-control" id="ciudadesId" value="#{controladorCrearMascota.mascota.ciudadesId}" title="CiudadesId" required="true" requiredMessage="The CiudadesId field is required.">
+                <f:selectItems value="#{controladorCrearMascota.listaCiudades}" var="listaCiudades" itemLabel="#{listaCiudades.nombre}"/>
+            </h:selectOneMenu>
+            <div class="form-group">
+                <h:outputLabel value="EstadoMascotasId:" for="estadoMascotasId" />
+                <h:selectOneMenu class="form-control" id="estadoMascotasId" value="#{controladorCrearMascota.mascota.estadoMascotasId}" title="EstadoMascotasId" required="true" requiredMessage="The EstadoMascotasId field is required.">
+                    <f:selectItems value="#{controladorCrearMascota.listaEstadosMascotas}" var="listaEstadosMascotas" itemLabel="#{listaEstadosMascotas.nombre}"/>
+                </h:selectOneMenu>
+            </div>
+            <!--<div class="form-group">
+                <h:outputLabel value="Imagen:" for="imagen" />
+                <h:inputText class="form-control" id="imagen" value="#{controladorCrearMascota.mascota.imagen}" title="Imagen" />
+            </div>-->
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-3">
+                    <h:commandButton value="cancelar" class="btn btn-default" action="/core/mascota/listarMascotas.xhtml?faces-redirect=true" immediate="true"></h:commandButton>
+                </div>
+                <div class="col-sm-3">
+                    <h:commandButton value="aceptar" class="btn btn-primary" action="#{controladorCrearMascota.crear()}"></h:commandButton>
+                </div>
+            </div>
+
+        </h:form>
+
+    </ui:define>
+
+    <!--Scripts adicionales si son necesarios-->
+    <ui:define name="lastScripts">
+
+
+
+    </ui:define>
+
+</ui:composition>

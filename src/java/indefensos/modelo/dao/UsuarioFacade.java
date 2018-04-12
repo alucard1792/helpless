@@ -5,6 +5,7 @@
  */
 package indefensos.modelo.dao;
 
+import indefensos.modelo.entidades.Rol;
 import indefensos.modelo.entidades.Usuario;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +45,15 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
 
         }
         return usuario;
+
+    }
+
+    public List<Usuario> listarUsuariosRol(Rol r) {
+        List<Usuario> listaUsuario = new ArrayList<>();
+        Query q = getEntityManager().createQuery("SELECT u FROM Usuario u WHERE u.rolesId = :rolesId", Usuario.class);
+        q.setParameter("rolesId", r);
+        listaUsuario = q.getResultList();
+        return listaUsuario;
 
     }
 

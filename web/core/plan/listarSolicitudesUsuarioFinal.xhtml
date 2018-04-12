@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui">
+
+    <!--Nombre de la pagina-->
+    <ui:define name="pageTitle">
+
+
+    </ui:define>
+
+    <!--estilos adicionales si son necesarias-->
+    <ui:define name="firstStyle">
+    </ui:define>
+
+    <!--titulo del contenido principal-->
+    <ui:define name="mainContentTitle">
+
+
+
+    </ui:define>
+
+    <!--contenido principal de la pagina-->
+    <ui:define name="mainContent">
+        <b:messages show-detail="true" show-summary="true"></b:messages>
+
+
+        <h:form>
+
+            <b:dataTable value="#{controladorListarPlanUsuarioFinal.listaPlanes}" var="item">
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="TipoError"/>
+                    </f:facet>
+                    <h:outputText value="#{item.tipoError}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="UsuariosFinalId"/>
+                    </f:facet>
+                    <h:outputText value="#{item.usuariosFinalId.nombres} #{item.usuariosFinalId.apellidos}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="opciones"/>
+                    </f:facet>
+                    <h:commandButton rendered="#{item.calificacion == null}" value="asignar calificacion" action="#{controladorEditarPlan.prepararEditarCalificacion(item)}"></h:commandButton>
+                </h:column>
+
+            </b:dataTable>
+
+        </h:form>
+
+    </ui:define>
+
+    <!--Scripts adicionales si son necesarios-->
+    <ui:define name="lastScripts">
+
+    </ui:define>
+
+</ui:composition>

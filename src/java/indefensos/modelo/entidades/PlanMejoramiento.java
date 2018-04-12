@@ -46,7 +46,7 @@ public class PlanMejoramiento implements Serializable {
     @Column(name = "tipo_error")
     private String tipoError;
     @Column(name = "is_solucionado")
-    private String isSolucionado;
+    private int isSolucionado;
     @JoinColumn(name = "usuarios_final_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Usuario usuariosFinalId;
@@ -85,11 +85,11 @@ public class PlanMejoramiento implements Serializable {
         this.tipoError = tipoError;
     }
 
-    public String getIsSolucionado() {
+    public int getIsSolucionado() {
         return isSolucionado;
     }
 
-    public void setIsSolucionado(String isSolucionado) {
+    public void setIsSolucionado(int isSolucionado) {
         this.isSolucionado = isSolucionado;
     }
 

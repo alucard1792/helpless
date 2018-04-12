@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui">
+
+    <!--Nombre de la pagina-->
+    <ui:define name="pageTitle">
+
+
+    </ui:define>
+
+    <!--estilos adicionales si son necesarias-->
+    <ui:define name="firstStyle">
+    </ui:define>
+
+    <!--titulo del contenido principal-->
+    <ui:define name="mainContentTitle">
+
+
+
+    </ui:define>
+
+    <!--contenido principal de la pagina-->
+    <ui:define name="mainContent">
+        <b:messages show-detail="true" show-summary="true"></b:messages>
+
+
+        <h:form>
+            <h1><h:outputText value="Create/Edit"/></h1>
+                <div class="form-group">
+                    <h:outputLabel value="Ingrese el tipo de error: " for="tipoError" />
+                    <h:inputText id="tipoError" value="#{controladorCrearPlan.planMejoramiento.tipoError}" title="TipoError" />
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-3">
+                        <h:commandButton value="cancelar" class="btn btn-default"></h:commandButton>
+                    </div>
+                    <div class="col-sm-3">
+                        <h:commandButton value="aceptar" class="btn btn-primary" action="#{controladorCrearPlan.crearSolicitud()}"></h:commandButton>
+                    </div>
+                </div>
+        </h:form>
+
+
+    </ui:define>
+
+    <!--Scripts adicionales si son necesarios-->
+    <ui:define name="lastScripts">
+
+
+
+    </ui:define>
+
+</ui:composition>

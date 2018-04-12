@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui">
+
+    <!--Nombre de la pagina-->
+    <ui:define name="pageTitle">
+
+
+    </ui:define>
+
+    <!--estilos adicionales si son necesarias-->
+    <ui:define name="firstStyle">
+    </ui:define>
+
+    <!--titulo del contenido principal-->
+    <ui:define name="mainContentTitle">
+
+
+
+    </ui:define>
+
+    <!--contenido principal de la pagina-->
+    <ui:define name="mainContent">
+        <b:messages show-detail="true" show-summary="true"></b:messages>
+
+
+        <h:form>
+
+            <div class="form-group">
+                <h:outputLabel value="Nombres:" for="nombres" />
+                <h:inputText class="form-control" id="nombres" value="#{controladorCrearUsuarios.usuario.nombres}" title="Nombres" />
+            </div>
+            <div class="form-group">
+                <h:outputLabel value="Apellidos:" for="apellidos" />
+                <h:inputText class="form-control" id="apellidos" value="#{controladorCrearUsuarios.usuario.apellidos}" title="Apellidos" />
+            </div>
+            <div class="form-group">
+                <h:outputLabel value="Documento:" for="documento" />
+                <h:inputText class="form-control" id="documento" value="#{controladorCrearUsuarios.usuario.documento}" title="Documento" />
+            </div>
+            <div class="form-group">
+                <h:outputLabel value="FechaNacimiento:" for="fechaNacimiento" />
+                    <b:dateTimePicker  id="fechaNacimiento" value="#{controladorCrearUsuarios.usuario.fechaNacimiento}" mode="popup" format="YYYY/MM/DD">
+                    </b:dateTimePicker>
+            </div>
+            <div class="form-group">
+                <h:outputLabel value="Email:" for="email" />
+                <h:inputText class="form-control" id="email" value="#{controladorCrearUsuarios.usuario.email}" title="Email" />
+            </div>
+            <div class="form-group">
+                <h:outputLabel value="Clave:" for="clave" />
+                <h:inputText class="form-control" id="clave" value="#{controladorCrearUsuarios.usuario.clave}" title="Clave" />
+            </div>
+            <div class="form-group">
+                <h:outputLabel value="Estado:" for="estado" />
+                <h:selectOneMenu class="form-control" id="estado" value="#{controladorCrearUsuarios.usuario.estado}" title="CiudadesId" required="true" requiredMessage="The CiudadesId field is required.">
+                    <f:selectItem  itemValue="0" itemLabel="Activo"/>
+                    <f:selectItem  itemValue="1" itemLabel="Inactivo"/>
+                </h:selectOneMenu>
+            </div>
+            <div class="form-group">
+                <h:outputLabel value="CiudadesId:" for="ciudadesId" />
+                <h:selectOneMenu class="form-control" id="ciudadesId" value="#{controladorCrearUsuarios.usuario.ciudadesId}" title="CiudadesId" required="true" requiredMessage="The CiudadesId field is required.">
+                    <!-- TODO: update below reference to list of available items-->
+                    <f:selectItems value="#{controladorCrearUsuarios.listaCiudades}" var="listaCiudades" itemLabel="#{listaCiudades.nombre}"/>
+                </h:selectOneMenu>
+            </div>
+            <div class="form-group">
+                <h:outputLabel value="RolesId:" for="rolesId" />
+                <h:selectOneMenu class="form-control" id="rolesId" value="#{controladorCrearUsuarios.usuario.rolesId}" title="RolesId" required="true" requiredMessage="The RolesId field is required.">
+                    <!-- TODO: update below reference to list of available items-->
+                    <f:selectItems value="#{controladorCrearUsuarios.listaRoles}" var="listaRoles" itemLabel="#{listaRoles.nombre}"/>
+                </h:selectOneMenu>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-3">
+                    <h:commandButton value="cancelar" class="btn btn-default"></h:commandButton>
+                </div>
+                <div class="col-sm-3">
+                    <h:commandButton value="aceptar" class="btn btn-primary" action="#{controladorCrearUsuarios.crear()}"></h:commandButton>
+                </div>
+            </div>
+
+        </h:form>
+
+
+
+    </ui:define>
+
+    <!--Scripts adicionales si son necesarios-->
+    <ui:define name="lastScripts">
+
+
+
+    </ui:define>
+
+</ui:composition>

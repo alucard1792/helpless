@@ -6,6 +6,7 @@
 package indefensos.modelo.entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +19,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -47,6 +50,9 @@ public class Proceso implements Serializable {
     private String descripcion;
     @Column(name = "is_autorizado")
     private Integer isAutorizado;
+    @Column(name = "fecha_proceso")
+    @Temporal(TemporalType.DATE)
+    private Date fechaProceso;
     @JoinColumn(name = "mascotas_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Mascota mascotasId;
@@ -93,6 +99,14 @@ public class Proceso implements Serializable {
         this.isAutorizado = isAutorizado;
     }
 
+    public Date getFechaProceso() {
+        return fechaProceso;
+    }
+
+    public void setFechaProceso(Date fechaProceso) {
+        this.fechaProceso = fechaProceso;
+    }
+
     public Mascota getMascotasId() {
         return mascotasId;
     }
@@ -133,5 +147,5 @@ public class Proceso implements Serializable {
     public String toString() {
         return "indefensos.modelo.entidades.Proceso[ id=" + id + " ]";
     }
-    
+
 }

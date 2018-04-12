@@ -42,8 +42,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Mascota.findByEdad", query = "SELECT m FROM Mascota m WHERE m.edad = :edad")
     , @NamedQuery(name = "Mascota.findByDescripcion", query = "SELECT m FROM Mascota m WHERE m.descripcion = :descripcion")
     , @NamedQuery(name = "Mascota.findByFechaRegistro", query = "SELECT m FROM Mascota m WHERE m.fechaRegistro = :fechaRegistro")
-    , @NamedQuery(name = "Mascota.findByFechaPerdida", query = "SELECT m FROM Mascota m WHERE m.fechaPerdida = :fechaPerdida")
-    , @NamedQuery(name = "Mascota.findByFechaAdopcion", query = "SELECT m FROM Mascota m WHERE m.fechaAdopcion = :fechaAdopcion")
     , @NamedQuery(name = "Mascota.findByTipoMascota", query = "SELECT m FROM Mascota m WHERE m.tipoMascota = :tipoMascota")})
 public class Mascota implements Serializable {
 
@@ -65,13 +63,11 @@ public class Mascota implements Serializable {
     @Column(name = "fecha_registro")
     @Temporal(TemporalType.DATE)
     private Date fechaRegistro;
-    @Column(name = "fecha_perdida")
-    private String fechaPerdida;
-    @Column(name = "fecha_adopcion")
-    private String fechaAdopcion;
     @Basic(optional = false)
     @Column(name = "tipo_mascota")
     private String tipoMascota;
+    @Column(name = "has_proceso")
+    private Integer hasProceso;
     @JoinColumn(name = "ciudades_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Ciudad ciudadesId;
@@ -144,28 +140,20 @@ public class Mascota implements Serializable {
         this.fechaRegistro = fechaRegistro;
     }
 
-    public String getFechaPerdida() {
-        return fechaPerdida;
-    }
-
-    public void setFechaPerdida(String fechaPerdida) {
-        this.fechaPerdida = fechaPerdida;
-    }
-
-    public String getFechaAdopcion() {
-        return fechaAdopcion;
-    }
-
-    public void setFechaAdopcion(String fechaAdopcion) {
-        this.fechaAdopcion = fechaAdopcion;
-    }
-
     public String getTipoMascota() {
         return tipoMascota;
     }
 
     public void setTipoMascota(String tipoMascota) {
         this.tipoMascota = tipoMascota;
+    }
+
+    public Integer getHasProceso() {
+        return hasProceso;
+    }
+
+    public void setHasProceso(Integer hasProceso) {
+        this.hasProceso = hasProceso;
     }
 
     public Ciudad getCiudadesId() {
@@ -225,5 +213,5 @@ public class Mascota implements Serializable {
     public String toString() {
         return "indefensos.modelo.entidades.Mascota[ id=" + id + " ]";
     }
-    
+
 }

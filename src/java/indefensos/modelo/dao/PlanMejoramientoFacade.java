@@ -6,9 +6,14 @@
 package indefensos.modelo.dao;
 
 import indefensos.modelo.entidades.PlanMejoramiento;
+import indefensos.modelo.entidades.Rol;
+import indefensos.modelo.entidades.Usuario;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +33,23 @@ public class PlanMejoramientoFacade extends AbstractFacade<PlanMejoramiento> {
     public PlanMejoramientoFacade() {
         super(PlanMejoramiento.class);
     }
+
+    public List<PlanMejoramiento> listarSolicitudesAsignadas(Usuario u) {
+        List<PlanMejoramiento> listaPlanes = new ArrayList<>();
+        Query q = getEntityManager().createQuery("SELECT p FROM PlanMejoramiento p WHERE p.usuariosSoporteId = :usuariosSoporteId", Usuario.class);
+        q.setParameter("usuariosSoporteId", u);
+        listaPlanes = q.getResultList();
+        return listaPlanes;
+
+    }
     
+    public List<PlanMejoramiento> listarSolicitudesUsuarioFinal(Usuario u) {
+        List<PlanMejoramiento> listaPlanes = new ArrayList<>();
+        Query q = getEntityManager().createQuery("SELECT p FROM PlanMejoramiento p WHERE p.usuariosFinalId = :usuariosFinalId", Usuario.class);
+        q.setParameter("usuariosFinalId", u);
+        listaPlanes = q.getResultList();
+        return listaPlanes;
+
+    }
+
 }
