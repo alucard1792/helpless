@@ -33,7 +33,7 @@
 
         <h:form prependId="false">
 
-            <b:dataTable value="#{controladorListarMascotas.listaMascotas}" var="item" id="table">
+            <b:dataTable value="#{controladorListarAdoptados.listaProcesos}" var="item" id="table">
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="Id"/>
@@ -42,61 +42,55 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="Nombre"/>
+                        <h:outputText value="motivo"/>
                     </f:facet>
-                    <h:outputText value="#{item.nombre}" id="nombre"/>
+                    <h:outputText value="#{item.descripcion}" id="descripcion"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="Edad"/>
+                        <h:outputText value="respuesta"/>
                     </f:facet>
-                    <h:outputText value="#{item.edad}"/>
+                    <h:outputText value="#{item.respuesta}"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="Descripcion"/>
+                        <h:outputText value="ciudadesId"/>
                     </f:facet>
-                    <h:outputText value="#{item.descripcion}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="FechaRegistro"/>
-                    </f:facet>
-                    <h:outputText value="#{item.fechaRegistro}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:outputText>
+                    <h:outputText value="#{item.mascotasId.ciudadesId.nombre}"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="TipoMascota"/>
                     </f:facet>
-                    <h:outputText value="#{item.tipoMascota}"/>
+                    <h:outputText value="#{item.mascotasId.tipoMascota}"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="CiudadesId"/>
+                        <h:outputText value="edad"/>
                     </f:facet>
-                    <h:outputText value="#{item.ciudadesId.nombre}"/>
+                    <h:outputText value="#{item.mascotasId.edad}"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="EstadoMascotasId"/>
+                        <h:outputText value="nombre mascota"/>
                     </f:facet>
-                    <h:outputText value="#{item.estadoMascotasId.nombre}"/>
+                    <h:outputText value="#{item.mascotasId.nombre}"/>
                 </h:column>
-                <h:column rendered="#{controladorLogin.usuarioSesion.rolesId.id == 5}">
+                <h:column>
                     <f:facet name="header">
-                        <h:outputText value="DueñoId"/>
+                        <h:outputText value="dueñoId"/>
                     </f:facet>
-                    <h:outputText value="#{item.dueñoId.nombres} #{item.dueñoId.apellidos}"/>
+                    <h:outputText value="#{item.mascotasId.dueñoId.nombres} #{item.mascotasId.dueñoId.apellidos}"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="opciones"/>
                     </f:facet>
-                    <h:commandButton class="btn btn-primary" value="editar" action="#{controladorEditarMascota.prepararEditar(item)}"></h:commandButton>
-                    <h:commandButton id="proceso" class="btnModal1 btn btn-primary"  value="Proceso" rendered="#{item.hasProceso == 0}">
-                        <f:ajax event="click" execute="proceso" listener="#{controladorIniciarProcesoMascota.prepararProceso(item)}" render="content-modal-eliminar"></f:ajax>
+                    <h:commandButton id="proceso" class="btnModal1 btn btn-primary"  value="adoptar" rendered="#{item.usuariosId eq null and controladorLogin.usuarioSesion.rolesId.id != 5}">
+                        <f:ajax event="click" execute="proceso" listener="#{controladorAdoptarMascota.prepararProceso(item)}" render="content-modal-eliminar"></f:ajax>
+                    </h:commandButton>
+                    <h:commandButton id="validarProceso" class="btnModal1 btn btn-primary"  value="validar proceso" rendered="#{controladorLogin.usuarioSesion.rolesId.id == 5 and item.usuariosId != null}">
+                        <f:ajax event="click" execute="validarProceso" listener="#{controladorAdoptarMascota.prepararProceso(item)}" render="content-modal-eliminar"></f:ajax>
                     </h:commandButton>
                 </h:column>
             </b:dataTable>
@@ -108,24 +102,17 @@
                         <!-- Modal content-->
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Nuevo proceso para: #{controladorIniciarProcesoMascota.mascotaSeleccionada.nombre}</h4>
+                            <h4 class="modal-title">iniciar adopcion para: #{controladorAdoptarMascota.procesoSeleccionado.mascotasId.nombre}</h4>
                         </div>
 
                         <div class="modal-body form-group">
                             <div class="form">
-                                tipo proceso: <h:selectOneMenu value="#{controladorIniciarProcesoMascota.proceso.tipoProceso}">
-                                    <f:selectItem itemValue="extraviado" itemLabel="extraviado"/>
-                                    <f:selectItem itemValue="adopcion" itemLabel="en adopcion"/>
-                                </h:selectOneMenu>
-                            </div>
-                            <br/>
-                            <div class="form">
-                                Descripcion: <h:inputText value="#{controladorIniciarProcesoMascota.proceso.descripcion}" />
+                                mensaje al adoptante: <h:inputText value="#{controladorAdoptarMascota.procesoSeleccionado.respuesta}" />
                             </div>
                         </div>
 
                         <div class="modal-footer">
-                            <h:commandButton class="btn btn-primary" value="crear" action="#{controladorIniciarProcesoMascota.crear()}"></h:commandButton>
+                            <h:commandButton class="btn btn-primary" value="aceptar" action="#{controladorAdoptarMascota.iniciarAdopcion()}"></h:commandButton>
                         </div>
 
                     </h:panelGroup>

@@ -53,6 +53,8 @@ public class Proceso implements Serializable {
     @Column(name = "fecha_proceso")
     @Temporal(TemporalType.DATE)
     private Date fechaProceso;
+    @Column(name = "respuesta")
+    private String respuesta;
     @JoinColumn(name = "mascotas_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Mascota mascotasId;
@@ -105,6 +107,14 @@ public class Proceso implements Serializable {
 
     public void setFechaProceso(Date fechaProceso) {
         this.fechaProceso = fechaProceso;
+    }
+
+    public String getRespuesta() {
+        return respuesta;
+    }
+
+    public void setRespuesta(String respuesta) {
+        this.respuesta = respuesta;
     }
 
     public Mascota getMascotasId() {

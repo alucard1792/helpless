@@ -6,8 +6,12 @@
 package indefensos.modelo.dao;
 
 import indefensos.modelo.entidades.Mascota;
+import indefensos.modelo.entidades.Proceso;
 import indefensos.modelo.entidades.Usuario;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -36,6 +40,32 @@ public class MascotaFacade extends AbstractFacade<Mascota> {
         Query q = getEntityManager().createQuery("SELECT m FROM Mascota m WHERE m.dueñoId = :dueñoId", Mascota.class);
         q.setParameter("dueñoId", u);
         return q.getResultList();
+
+    }
+
+    public List<Mascota> listarMascotasParaAdoptar() {
+        Set<Mascota> listaMascotas = new HashSet<>();
+        Query q = getEntityManager().createQuery("SELECT p FROM Proceso p WHERE p.tipoProceso = :tipoProceso", Proceso.class);
+        q.setParameter("tipoProceso", "adopcion");
+        for (Proceso p : new ArrayList<Proceso>(q.getResultList())) {
+            listaMascotas.add(p.getMascotasId());
+
+        }
+        List<Mascota> lm = new ArrayList<>(listaMascotas);
+        return lm;
+
+    }
+
+    public List<Mascota> listarMascotasExtraviadas() {
+        Set<Mascota> listaMascotas = new HashSet<>();
+        Query q = getEntityManager().createQuery("SELECT p FROM Proceso p WHERE p.tipoProceso = :tipoProceso", Proceso.class);
+        q.setParameter("tipoProceso", "extraviado");
+        for (Proceso p : new ArrayList<Proceso>(q.getResultList())) {
+            listaMascotas.add(p.getMascotasId());
+
+        }
+        List<Mascota> lm = new ArrayList<>(listaMascotas);
+        return lm;
 
     }
 

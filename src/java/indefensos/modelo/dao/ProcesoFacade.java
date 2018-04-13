@@ -6,9 +6,11 @@
 package indefensos.modelo.dao;
 
 import indefensos.modelo.entidades.Proceso;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +30,12 @@ public class ProcesoFacade extends AbstractFacade<Proceso> {
     public ProcesoFacade() {
         super(Proceso.class);
     }
-    
+
+    public List<Proceso> listarMascotasConProcesoAdoptar() {
+        Query q = getEntityManager().createQuery("SELECT p FROM Proceso p JOIN FETCH p.mascotasId.dueñoId WHERE p.tipoProceso = :tipoProceso AND p.isAutorizado = 0 AND p.usuariosId IS NULL", Proceso.class);
+        q.setParameter("tipoProceso", "adopcion");
+        return q.getResultList();
+
+    }
+
 }
