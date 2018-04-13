@@ -25,7 +25,22 @@
     <!--contenido principal de la pagina-->
     <ui:define name="mainContent">
 
-
+        envio de emails
+        <h:form>
+            <div class="form-group">
+                <h:outputLabel value="destinarios:" for="nombres" />
+                <h:inputText class="form-control" id="nombre" value="#{controladorEnvioEmail.destinarios}" title="destinarios" />
+            </div>
+            <div class="form-group">
+                <h:outputLabel value="mensaje:" for="edad" />
+                <h:inputText class="form-control" id="edad" value="#{controladorEnvioEmail.message}" title="mensaje" />
+            </div>
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <h:commandButton value="aceptar" class="btn btn-primary" action="#{controladorEnvioEmail.enviarEmail()}"></h:commandButton>
+                </div>
+            </div>
+        </h:form>
 
     </ui:define>
 

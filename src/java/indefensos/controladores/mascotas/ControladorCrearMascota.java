@@ -71,6 +71,7 @@ public class ControladorCrearMascota implements Serializable {
     public String crear() {
         mascota.setFechaRegistro(new Date());
         mascota.setDueñoId(controladorLogin.getUsuarioSesion());
+        mascota.setHasProceso(0);
         mascotaFacade.create(mascota);
         return "/core/mascota/listarMascotas.xhtml?faces-redirect=true";
         

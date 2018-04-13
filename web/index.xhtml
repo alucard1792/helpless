@@ -9,12 +9,12 @@
     <h:body>
         <h:form>
             <b:messages id="idMessageLogin" showDetail="true" showSummary="true"></b:messages>
-            <b:label value="documento"></b:label>
-            <b:inputText value="#{controladorLogin.documento}"></b:inputText>
-            <b:label value="clave"></b:label>
-            <b:inputText value="#{controladorLogin.clave}"></b:inputText>
-            <b:commandButton update="idMessageLogin" action="#{controladorLogin.iniciarSesion()}" value="iniciar sesion"></b:commandButton>
-            <b:commandButton ajax="false" action="#{controladorLogin.cerrarSesion()}" value="cerrar sesion"></b:commandButton>
+            <h:outputLabel value="documento"></h:outputLabel>
+            <h:inputText value="#{controladorLogin.documento}"></h:inputText>
+            <h:outputLabel value="clave"></h:outputLabel>
+            <h:inputText value="#{controladorLogin.clave}"></h:inputText>
+            <h:commandButton action="#{controladorLogin.iniciarSesion()}" value="iniciar sesion"></h:commandButton>
+            <h:commandButton action="#{controladorLogin.cerrarSesion()}" value="cerrar sesion"></h:commandButton>
         </h:form>
     </h:body>
 </html>
