@@ -35,7 +35,7 @@
             <div class="table-responsive">
 
 
-                <b:dataTable value="#{controladorListarAdoptados.listaProcesos}" var="item" id="table">
+                <b:dataTable value="#{controladorListarExtraviados.listaProcesos}" var="item" id="table">
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Id"/>
@@ -47,6 +47,12 @@
                             <h:outputText value="motivo"/>
                         </f:facet>
                         <h:outputText value="#{item.descripcion}" id="descripcion"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="tipo proceso"/>
+                        </f:facet>
+                        <h:outputText value="#{item.tipoProceso}" id="tipoProceso"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
@@ -92,7 +98,7 @@
                         <h:commandButton id="proceso" class="btnModal1 btn btn-primary"  value="adoptar" rendered="#{item.usuariosId eq null and controladorLogin.usuarioSesion.rolesId.id != 5}">
                             <f:ajax event="click" execute="proceso" listener="#{controladorAdoptarMascota.prepararProceso(item)}" render="content-modal-eliminar1"></f:ajax>
                         </h:commandButton>
-                        <h:commandButton id="validarProceso" class="btnModal2 btn btn-primary"  value="validar proceso" rendered="#{item.usuariosId != null and controladorLogin.usuarioSesion.rolesId.id == 5 and item.isAutorizado == 0}">
+                        <h:commandButton id="validarProceso" class="btnModal2 btn btn-primary"  value="validar proceso" rendered="#{item.usuariosId != null and controladorLogin.usuarioSesion.rolesId.id == 5 }">
                             <f:ajax event="click" execute="validarProceso" listener="#{controladorAdoptarMascota.prepararProceso(item)}" render="content-modal-eliminar2"></f:ajax>
                         </h:commandButton>
                     </h:column>

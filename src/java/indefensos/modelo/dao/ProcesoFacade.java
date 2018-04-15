@@ -37,5 +37,12 @@ public class ProcesoFacade extends AbstractFacade<Proceso> {
         return q.getResultList();
 
     }
+    
+    public List<Proceso> listarMascotasConProcesoExtraviado() {
+        Query q = getEntityManager().createQuery("SELECT p FROM Proceso p JOIN FETCH p.mascotasId.dueñoId WHERE p.tipoProceso = :tipoProceso AND p.isAutorizado = 0 AND p.usuariosId IS NULL", Proceso.class);
+        q.setParameter("tipoProceso", "extraviado");
+        return q.getResultList();
+
+    }
 
 }

@@ -6,11 +6,8 @@
 package indefensos.controladores.mascotas;
 
 import indefensos.controladores.login.ControladorLogin;
-import indefensos.controladores.usuarios.*;
 import indefensos.modelo.dao.MascotaFacade;
-import indefensos.modelo.dao.UsuarioFacade;
 import indefensos.modelo.entidades.Mascota;
-import indefensos.modelo.entidades.Usuario;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;

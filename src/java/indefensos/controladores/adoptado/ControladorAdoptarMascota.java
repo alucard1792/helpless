@@ -81,7 +81,7 @@ public class ControladorAdoptarMascota implements Serializable {
     public String iniciarAdopcion() {
         procesoSeleccionado.setUsuariosId(controladorLogin.getUsuarioSesion());
         procesoFacade.edit(procesoSeleccionado);
-        return "/core/mascota/listarMascotas.xhtml?faces-redirect=true";
+        return "/core/adopcion/listarAdoptados.xhtml?faces-redirect=true";
         
     }
     
