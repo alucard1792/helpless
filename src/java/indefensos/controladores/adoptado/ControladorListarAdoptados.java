@@ -38,9 +38,10 @@ public class ControladorListarAdoptados implements Serializable {
     public void init() {
         if (controladorLogin.getUsuarioSesion().getRolesId().equals(new Rol(5))) {
             listaProcesos = procesoFacade.findAll();
-
+            System.out.println("es admin");
         } else {
             listaProcesos = procesoFacade.listarMascotasConProcesoAdoptar();
+            System.out.println("es otro");
 
         }
 

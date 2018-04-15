@@ -87,10 +87,12 @@ public class ControladorAdoptarMascota implements Serializable {
     
     public String aprobarAdopcion() {
         procesoSeleccionado.setIsAutorizado(1);
-        procesoSeleccionado.getMascotasId().setDueñoId(procesoSeleccionado.getUsuariosId());
-        mascotaFacade.edit(procesoSeleccionado.getMascotasId());
+        Mascota m = procesoSeleccionado.getMascotasId();
+        m.setDueñoId(procesoSeleccionado.getUsuariosId());
+        m.setEstadoMascotasId(new EstadoMascota(1));
         procesoFacade.edit(procesoSeleccionado);
-        return "/core/mascota/listarMascotas.xhtml?faces-redirect=true";
+        mascotaFacade.edit(m);
+        return "/core/adopcion/listarAdoptados.xhtml?faces-redirect=true";
         
     }
     
