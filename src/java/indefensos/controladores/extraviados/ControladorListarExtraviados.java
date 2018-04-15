@@ -41,7 +41,7 @@ public class ControladorListarExtraviados implements Serializable {
             listaProcesos = procesoFacade.findAll();
             System.out.println("es admin");
         } else {
-            listaProcesos = procesoFacade.listarMascotasConProcesoExtraviado();
+            listaProcesos = procesoFacade.listarMascotasConProcesoExtraviado(controladorLogin.getUsuarioSesion());
             System.out.println("es otro");
 
         }

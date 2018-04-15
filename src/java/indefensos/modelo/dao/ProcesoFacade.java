@@ -6,6 +6,8 @@
 package indefensos.modelo.dao;
 
 import indefensos.modelo.entidades.Proceso;
+import indefensos.modelo.entidades.Usuario;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -38,9 +40,17 @@ public class ProcesoFacade extends AbstractFacade<Proceso> {
 
     }
     
-    public List<Proceso> listarMascotasConProcesoExtraviado() {
+    public List<Proceso> listarMascotasConProcesoExtraviado(Usuario u) {
+        List<Proceso>listaProcesos = new ArrayList<>();
         Query q = getEntityManager().createQuery("SELECT p FROM Proceso p JOIN FETCH p.mascotasId.dueñoId WHERE p.tipoProceso = :tipoProceso AND p.isAutorizado = 0 AND p.usuariosId IS NULL", Proceso.class);
         q.setParameter("tipoProceso", "extraviado");
+        for(Proceso p: new ArrayList<Proceso>(q.getResultList())){
+            if(!p.getMascotasId().getDueñoId().equals(u)){
+                listaProcesos.add(p);
+            
+            }
+        
+        }
         return q.getResultList();
 
     }

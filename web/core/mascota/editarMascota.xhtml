@@ -53,12 +53,6 @@
             <h:selectOneMenu class="form-control" id="ciudadesId" value="#{controladorEditarMascota.mascotaSeleccionada.ciudadesId}" title="CiudadesId" required="true" requiredMessage="The CiudadesId field is required.">
                 <f:selectItems value="#{controladorEditarMascota.listaCiudades}" var="listaCiudades" itemLabel="#{listaCiudades.nombre}"/>
             </h:selectOneMenu>
-            <div class="form-group">
-                <h:outputLabel value="EstadoMascotasId:" for="estadoMascotasId" />
-                <h:selectOneMenu class="form-control" id="estadoMascotasId" value="#{controladorEditarMascota.mascotaSeleccionada.estadoMascotasId}" title="EstadoMascotasId" required="true" requiredMessage="The EstadoMascotasId field is required.">
-                    <f:selectItems value="#{controladorEditarMascota.listaEstadosMascotas}" var="listaEstadosMascotas" itemLabel="#{listaEstadosMascotas.nombre}"/>
-                </h:selectOneMenu>
-            </div>
             <!--<div class="form-group">
                 <h:outputLabel value="Imagen:" for="imagen" />
                 <h:inputText class="form-control" id="imagen" value="#{controladorEditarMascota.mascotaSeleccionada.imagen}" title="Imagen" />

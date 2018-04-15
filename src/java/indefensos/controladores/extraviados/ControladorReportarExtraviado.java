@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package indefensos.controladores.adoptado;
+package indefensos.controladores.extraviados;
 
+import indefensos.controladores.adoptado.*;
 import indefensos.controladores.login.ControladorLogin;
 import indefensos.modelo.dao.EstadoMascotaFacade;
 import indefensos.modelo.dao.MascotaFacade;
@@ -12,8 +13,8 @@ import indefensos.modelo.dao.ProcesoFacade;
 import indefensos.modelo.entidades.EstadoMascota;
 import indefensos.modelo.entidades.Mascota;
 import indefensos.modelo.entidades.Proceso;
+import indefensos.modelo.entidades.Rol;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -25,10 +26,10 @@ import javax.inject.Inject;
  *
  * @author David
  */
-@Named(value = "controladorAdoptarMascota")
+@Named(value = "controladorReportarExtraviado")
 @ViewScoped
-public class ControladorAdoptarMascota implements Serializable {
-    
+public class ControladorReportarExtraviado implements Serializable {
+
     @EJB
     private MascotaFacade mascotaFacade;
     @EJB
@@ -41,7 +42,7 @@ public class ControladorAdoptarMascota implements Serializable {
     private Mascota mascotaSeleccionada;
     private Proceso procesoSeleccionado;
     
-    public ControladorAdoptarMascota() {
+    public ControladorReportarExtraviado() {
     }
     
     @PostConstruct
@@ -78,10 +79,11 @@ public class ControladorAdoptarMascota implements Serializable {
         
     }
     
-    public String iniciarAdopcion() {
+    public String reportarMascota() {
+        procesoSeleccionado.setIsAutorizado(1);
         procesoSeleccionado.setUsuariosId(controladorLogin.getUsuarioSesion());
         procesoFacade.edit(procesoSeleccionado);
-        return "/core/adopcion/listarAdoptados.xhtml?faces-redirect=true";
+        return "/core/extraviados/listarExtraviados.xhtml?faces-redirect=true";
         
     }
     
@@ -90,11 +92,10 @@ public class ControladorAdoptarMascota implements Serializable {
         Mascota m = procesoSeleccionado.getMascotasId();
         m.setDueñoId(procesoSeleccionado.getUsuariosId());
         m.setEstadoMascotasId(new EstadoMascota(1));
-        m.setHasProceso(0);
         procesoFacade.edit(procesoSeleccionado);
         mascotaFacade.edit(m);
         return "/core/adopcion/listarAdoptados.xhtml?faces-redirect=true";
         
     }
-    
+
 }
