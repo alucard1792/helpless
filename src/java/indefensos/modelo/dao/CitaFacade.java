@@ -6,9 +6,12 @@
 package indefensos.modelo.dao;
 
 import indefensos.modelo.entidades.Cita;
+import indefensos.modelo.entidades.Usuario;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +31,12 @@ public class CitaFacade extends AbstractFacade<Cita> {
     public CitaFacade() {
         super(Cita.class);
     }
-    
+
+    public List<Cita> listarCitasUsuarioEnSesion(Usuario u) {
+        Query q = getEntityManager().createQuery("SELECT c FROM Cita c WHERE c.usuariosId = :usuariosId", Cita.class);
+        q.setParameter("usuariosId", u);
+        return q.getResultList();
+
+    }
+
 }

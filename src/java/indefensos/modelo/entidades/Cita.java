@@ -44,8 +44,11 @@ public class Cita implements Serializable {
     @Column(name = "Asunto")
     private String asunto;
     @Basic(optional = false)
+    @Column(name = "mensaje")
+    private String mensaje;
+    @Basic(optional = false)
     @Column(name = "is_leida")
-    private String isLeida;
+    private int isLeida;
     @JoinColumn(name = "usuarios_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Usuario usuariosId;
@@ -57,7 +60,7 @@ public class Cita implements Serializable {
         this.id = id;
     }
 
-    public Cita(Integer id, String asunto, String isLeida) {
+    public Cita(Integer id, String asunto, int isLeida) {
         this.id = id;
         this.asunto = asunto;
         this.isLeida = isLeida;
@@ -79,11 +82,19 @@ public class Cita implements Serializable {
         this.asunto = asunto;
     }
 
-    public String getIsLeida() {
+    public int getIsLeida() {
         return isLeida;
     }
 
-    public void setIsLeida(String isLeida) {
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    public void setIsLeida(int isLeida) {
         this.isLeida = isLeida;
     }
 
