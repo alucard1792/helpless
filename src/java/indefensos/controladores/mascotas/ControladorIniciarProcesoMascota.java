@@ -86,7 +86,7 @@ public class ControladorIniciarProcesoMascota implements Serializable {
         if (proceso.getTipoProceso().equals("extraviado")) {
             mascotaSeleccionada.setEstadoMascotasId(new EstadoMascota(2));
 
-        } else if (proceso.getTipoProceso().equals("en adopcion")) {
+        } else if (proceso.getTipoProceso().equals("adopcion")) {
             mascotaSeleccionada.setEstadoMascotasId(new EstadoMascota(3));
 
         }

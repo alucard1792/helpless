@@ -24,8 +24,11 @@
         <b:messages show-detail="true" show-summary="true"></b:messages>
 
         <div class="panel-heading">
-            <div class="panel-title"><h2>Mascotas extraviadas</h2></div>
+            <div class="panel-title"><h2>Mis mascotas extraviadas</h2></div>
             <div class="panel-options">
+                <h:form>
+                    <span><h:commandLink action="/core/extraviados/listarExtraviados.xhtml?faces-redirect=true" value="listar todas las mascotas extraviadas"/></span><br></br>
+                </h:form>
             </div>
         </div>
         <br></br><br></br><br></br>
@@ -33,8 +36,7 @@
         <h:form prependId="false">
             <div class="table-responsive">
 
-
-                <b:dataTable value="#{controladorListarExtraviados.listaProcesos}" var="item" id="table">
+                <b:dataTable value="#{controladorListarMisMascotasExtraviadas.listaProcesos}" var="item" id="table">
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Id"/>
@@ -71,11 +73,18 @@
                         </f:facet>
                         <h:outputText value="#{item.mascotasId.edad}"/>
                     </h:column>
-                    <h:column rendered="#{controladorLogin.usuarioSesion.rolesId.id == 5}">
+                    <h:column>
                         <f:facet name="header">
-                            <h:outputText value="interezado"/>
+                            <h:outputText value="nombre"/>
                         </f:facet>
-                        <h:outputText value="#{item.usuariosId.nombres} #{item.usuariosId.nombres}"/>
+                        <h:outputText value="#{item.mascotasId.nombre}"/>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="usuario que reporto a la mascota"/>
+                        </f:facet>
+                        <h:outputText value="#{item.usuariosId.nombres} #{item.usuariosId.apellidos}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
@@ -94,8 +103,8 @@
                         <f:facet name="header">
                             <h:outputText value="opciones"/>
                         </f:facet>
-                        <h:commandButton id="proceso" class="btnModal1 btn btn-primary"  value="reportar" rendered="#{item.usuariosId eq null and controladorLogin.usuarioSesion.rolesId.id != 5}">
-                            <f:ajax event="click" execute="proceso" listener="#{controladorReportarExtraviado.prepararProceso(item)}" render="content-modal-eliminar1"></f:ajax>
+                        <h:commandButton id="proceso" class="btnModal1 btn btn-primary"  value="validar informacion" rendered="#{item.usuariosId != null and controladorLogin.usuarioSesion.rolesId.id != 5}">
+                            <f:ajax event="click" execute="proceso" listener="#{controladorValidarExtraviado.prepararProceso(item)}" render="content-modal-eliminar1"></f:ajax>
                         </h:commandButton>
                     </h:column>
                 </b:dataTable>
@@ -107,17 +116,20 @@
                             <!-- Modal content-->
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">reportar mascota de #{controladorReportarExtraviado.procesoSeleccionado.mascotasId.dueñoId.nombres} #{controladorReportarExtraviado.procesoSeleccionado.mascotasId.dueñoId.apellidos}</h4>
+                                <h4 class="modal-title">validar informacion de la mascota: #{controladorValidarExtraviado.procesoSeleccionado.mascotasId.nombre}</h4>
                             </div>
 
                             <div class="modal-body form-group">
                                 <div class="form">
-                                    mensaje al dueño: <h:inputText value="#{controladorReportarExtraviado.procesoSeleccionado.respuesta}" />
+                                    La informacion es veridica: <h:selectOneMenu value="#{controladorValidarExtraviado.respuesta}">
+                                        <f:selectItem itemValue="1" itemLabel="si"></f:selectItem>
+                                        <f:selectItem itemValue="0" itemLabel="no"></f:selectItem>
+                                    </h:selectOneMenu>
                                 </div>
                             </div>
 
                             <div class="modal-footer">
-                                <h:commandButton class="btn btn-primary" value="aceptar" action="#{controladorReportarExtraviado.reportarMascota()}"></h:commandButton>
+                                <h:commandButton class="btn btn-primary" value="aceptar" action="#{controladorValidarExtraviado.validarInformacion()}"></h:commandButton>
                             </div>
 
                         </h:panelGroup>

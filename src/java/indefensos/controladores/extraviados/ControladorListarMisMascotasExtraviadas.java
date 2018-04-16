@@ -11,7 +11,6 @@ import indefensos.modelo.dao.ProcesoFacade;
 import indefensos.modelo.entidades.Proceso;
 import indefensos.modelo.entidades.Rol;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -23,9 +22,9 @@ import javax.inject.Inject;
  *
  * @author David
  */
-@Named(value = "controladorListarExtraviados")
+@Named(value = "controladorListarMisMascotasExtraviadas")
 @ViewScoped
-public class ControladorListarExtraviados implements Serializable {
+public class ControladorListarMisMascotasExtraviadas implements Serializable {
 
     @EJB
     private ProcesoFacade procesoFacade;
@@ -33,24 +32,16 @@ public class ControladorListarExtraviados implements Serializable {
     private ControladorLogin controladorLogin;
     private List<Proceso> listaProcesos;
 
-    public ControladorListarExtraviados() {
+    public ControladorListarMisMascotasExtraviadas() {
     }
 
     @PostConstruct
     public void init() {
         if (controladorLogin.getUsuarioSesion().getRolesId().equals(new Rol(5))) {
-            listaProcesos = procesoFacade.listarMascotasConProcesoExtraviadoAdmin();
+            listaProcesos = procesoFacade.findAll();
             System.out.println("es admin");
         } else {
-            listaProcesos = procesoFacade.listarMascotasConProcesoExtraviado(controladorLogin.getUsuarioSesion());
-            for (Proceso p : new ArrayList<Proceso>(listaProcesos)) {
-                System.out.println(p.getMascotasId().getDueñoId().getNombres() + " " + p.getMascotasId().getDueñoId().getApellidos());
-                if (p.getMascotasId().getDueñoId().equals(controladorLogin.getUsuarioSesion())) {
-                    listaProcesos.remove(p);
-
-                }
-
-            }
+            listaProcesos = procesoFacade.listarMascotasExtraviadasUsuarioEnSesion(controladorLogin.getUsuarioSesion());
             System.out.println("es otro");
 
         }

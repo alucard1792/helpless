@@ -73,6 +73,7 @@ public class ControladorCrearUsuarios implements Serializable {
     }
 
     public String crear(){
+        usuario.setRolesId(new Rol(6));
         usuario.setFechaRegistro(new Date());
         usuarioFacade.create(usuario);
         return "/core/usuarios/listarUsuarios.xhtml?faces-redirect=true";

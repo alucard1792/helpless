@@ -27,7 +27,13 @@
     <!--contenido principal de la pagina-->
     <ui:define name="mainContent">
         <b:messages show-detail="true" show-summary="true"></b:messages>
-
+        <div class="panel-heading">
+            <div class="panel-title"><h2>Usuarios registrados</h2></div>
+            <div class="panel-options">
+                <span><h:link outcome="/core/usuarios/crearUsuario.xhtml?faces-redirect=true" value="ingresar nuevo usuario">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span>
+            </div>
+        </div>
+        <br></br><br></br><br></br>
         <h:form>
             <b:dataTable value="#{controladorListarUsuarios.listaUsuario}" var="item" searching="true">
                 <h:column>

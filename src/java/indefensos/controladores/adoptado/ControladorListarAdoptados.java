@@ -10,6 +10,7 @@ import indefensos.modelo.dao.ProcesoFacade;
 import indefensos.modelo.entidades.Proceso;
 import indefensos.modelo.entidades.Rol;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -37,10 +38,18 @@ public class ControladorListarAdoptados implements Serializable {
     @PostConstruct
     public void init() {
         if (controladorLogin.getUsuarioSesion().getRolesId().equals(new Rol(5))) {
-            listaProcesos = procesoFacade.findAll();
+            listaProcesos = procesoFacade.listarMascotasConProcesoAdoptarAdmin();
             System.out.println("es admin");
         } else {
             listaProcesos = procesoFacade.listarMascotasConProcesoAdoptar();
+            for (Proceso p : new ArrayList<Proceso>(listaProcesos)) {
+                System.out.println(p.getMascotasId().getDueñoId().getNombres() + " " + p.getMascotasId().getDueñoId().getApellidos());
+                if (p.getMascotasId().getDueñoId().equals(controladorLogin.getUsuarioSesion())) {
+                    listaProcesos.remove(p);
+
+                }
+
+            }
             System.out.println("es otro");
 
         }

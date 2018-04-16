@@ -27,6 +27,12 @@
     <!--contenido principal de la pagina-->
     <ui:define name="mainContent">
         <b:messages show-detail="true" show-summary="true"></b:messages>
+        <div class="panel-heading">
+            <div class="panel-title"><h2>Ingresar nueva mascota</h2></div>
+            <div class="panel-options">
+            </div>
+        </div>
+        <br></br><br></br><br></br>
 
         <h:form>
 
@@ -49,15 +55,11 @@
                     <f:selectItem itemValue="gato" itemLabel="gato"/>
                 </h:selectOneMenu>
             </div>
+            <div class="form-group">
             <h:outputLabel value="CiudadesId:" for="ciudadesId" />
             <h:selectOneMenu class="form-control" id="ciudadesId" value="#{controladorCrearMascota.mascota.ciudadesId}" title="CiudadesId" required="true" requiredMessage="The CiudadesId field is required.">
                 <f:selectItems value="#{controladorCrearMascota.listaCiudades}" var="listaCiudades" itemLabel="#{listaCiudades.nombre}"/>
             </h:selectOneMenu>
-            <div class="form-group">
-                <h:outputLabel value="EstadoMascotasId:" for="estadoMascotasId" />
-                <h:selectOneMenu class="form-control" id="estadoMascotasId" value="#{controladorCrearMascota.mascota.estadoMascotasId}" title="EstadoMascotasId" required="true" requiredMessage="The EstadoMascotasId field is required.">
-                    <f:selectItems value="#{controladorCrearMascota.listaEstadosMascotas}" var="listaEstadosMascotas" itemLabel="#{listaEstadosMascotas.nombre}"/>
-                </h:selectOneMenu>
             </div>
             <!--<div class="form-group">
                 <h:outputLabel value="Imagen:" for="imagen" />

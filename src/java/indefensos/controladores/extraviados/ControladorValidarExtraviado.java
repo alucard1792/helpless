@@ -26,9 +26,9 @@ import javax.inject.Inject;
  *
  * @author David
  */
-@Named(value = "controladorReportarExtraviado")
+@Named(value = "controladorValidarExtraviado")
 @ViewScoped
-public class ControladorReportarExtraviado implements Serializable {
+public class ControladorValidarExtraviado implements Serializable {
 
     @EJB
     private MascotaFacade mascotaFacade;
@@ -41,13 +41,22 @@ public class ControladorReportarExtraviado implements Serializable {
     private List<EstadoMascota> listaEstadosMascotas;
     private Mascota mascotaSeleccionada;
     private Proceso procesoSeleccionado;
+    private int respuesta;
 
-    public ControladorReportarExtraviado() {
+    public ControladorValidarExtraviado() {
     }
 
     @PostConstruct
     public void init() {
 
+    }
+
+    public int getRespuesta() {
+        return respuesta;
+    }
+
+    public void setRespuesta(int respuesta) {
+        this.respuesta = respuesta;
     }
 
     public List<EstadoMascota> getListaEstadosMascotas() {
@@ -79,11 +88,26 @@ public class ControladorReportarExtraviado implements Serializable {
 
     }
 
-    public String reportarMascota() {
-        //procesoSeleccionado.setIsAutorizado(1);
-        procesoSeleccionado.setUsuariosId(controladorLogin.getUsuarioSesion());
-        procesoFacade.edit(procesoSeleccionado);
-        return "/core/extraviados/listarExtraviados.xhtml?faces-redirect=true";
+    public String validarInformacion() {
+        if (respuesta == 1) {
+            procesoSeleccionado.setIsAutorizado(1);
+            Mascota m = procesoSeleccionado.getMascotasId();
+            m.setEstadoMascotasId(new EstadoMascota(1));
+            procesoSeleccionado.setIsAutorizado(1);
+            procesoFacade.edit(procesoSeleccionado);
+            mascotaFacade.edit(m);
+            return "/core/extraviados/listarMisMascotasExtraviadas.xhtml?faces-redirect=true";
+
+        } else if (respuesta == 0) {
+            procesoSeleccionado.setUsuariosId(null);
+            procesoSeleccionado.setRespuesta(" ");
+            procesoFacade.edit(procesoSeleccionado);
+            return "/core/extraviados/listarMisMascotasExtraviadas.xhtml?faces-redirect=true";
+
+        } else {
+            return "";
+
+        }
 
     }
 

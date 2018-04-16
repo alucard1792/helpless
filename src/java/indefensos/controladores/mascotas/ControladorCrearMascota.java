@@ -69,6 +69,7 @@ public class ControladorCrearMascota implements Serializable {
     }
     
     public String crear() {
+        mascota.setEstadoMascotasId(new EstadoMascota(1));
         mascota.setFechaRegistro(new Date());
         mascota.setDueñoId(controladorLogin.getUsuarioSesion());
         mascota.setHasProceso(0);
