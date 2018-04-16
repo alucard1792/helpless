@@ -28,7 +28,9 @@ public class ControladorListarMascotas implements Serializable {
     private MascotaFacade mascotaFacade;
     @Inject
     private ControladorLogin controladorLogin;
+    private Mascota mascotaSeleccionada;
     private List<Mascota> listaMascotas;
+    
 
     public ControladorListarMascotas() {
     }
@@ -39,8 +41,20 @@ public class ControladorListarMascotas implements Serializable {
 
     }
 
+    public Mascota getMascotaSeleccionada() {
+        return mascotaSeleccionada;
+    }
+
+    public void setMascotaSeleccionada(Mascota mascotaSeleccionada) {
+        this.mascotaSeleccionada = mascotaSeleccionada;
+    }
+
     public List<Mascota> getListaMascotas() {
         return listaMascotas;
+    }
+    
+    public void prepararImagen(Mascota m){
+        this.mascotaSeleccionada = m;
     }
 
 }

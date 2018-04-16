@@ -93,6 +93,7 @@ public class ControladorValidarExtraviado implements Serializable {
             procesoSeleccionado.setIsAutorizado(1);
             Mascota m = procesoSeleccionado.getMascotasId();
             m.setEstadoMascotasId(new EstadoMascota(1));
+            m.setHasProceso(0);
             procesoSeleccionado.setIsAutorizado(1);
             procesoFacade.edit(procesoSeleccionado);
             mascotaFacade.edit(m);
