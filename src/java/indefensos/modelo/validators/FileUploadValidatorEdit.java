@@ -16,8 +16,8 @@ import javax.servlet.http.Part;
  *
  * @author David
  */
-@FacesValidator(value = "fileUploadValidator")
-public class FileUploadValidator implements Validator {
+@FacesValidator(value = "fileUploadValidatorEdit")
+public class FileUploadValidatorEdit implements Validator {
 
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {

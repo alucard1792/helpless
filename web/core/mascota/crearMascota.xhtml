@@ -27,58 +27,59 @@
 
     <!--contenido principal de la pagina-->
     <ui:define name="mainContent">
-        <b:messages show-detail="true" show-summary="true"></b:messages>
-        <div class="panel-heading">
-            <div class="panel-title"><h2>Ingresar nueva mascota</h2></div>
-            <div class="panel-options">
-            </div>
-        </div>
-        <br></br><br></br><br></br>
-
-        <h:form enctype="multipart/form-data" id="form" prependId="false">
-
-            <div class="form-group">
-                <h:outputLabel value="Nombres:" for="nombres" />
-                <h:inputText class="form-control" id="nombre" value="#{controladorCrearMascota.mascota.nombre}" title="Nombre" />
-            </div>
-            <div class="form-group">
-                <h:outputLabel value="Edad:" for="edad" />
-                <h:inputText class="form-control" id="edad" value="#{controladorCrearMascota.mascota.edad}" title="Edad" />
-            </div>
-            <div class="form-group">
-                <h:outputLabel value="Descripcion:" for="descripcion" />
-                <h:inputText class="form-control" id="descripcion" value="#{controladorCrearMascota.mascota.descripcion}" title="Descripcion" />
-            </div>
-            <div class="form-group">
-                <h:outputLabel value="TipoMascota:" for="tipoMascota" />
-                <h:selectOneMenu class="form-control" id="tipoMascota" value="#{controladorCrearMascota.mascota.tipoMascota}" title="tipoMascota" required="true" requiredMessage="The tipoMascota field is required.">
-                    <f:selectItem itemValue="perro" itemLabel="perro"/>
-                    <f:selectItem itemValue="gato" itemLabel="gato"/>
-                </h:selectOneMenu>
-            </div>
-            <div class="form-group">
-            <h:outputLabel value="CiudadesId:" for="ciudadesId" />
-            <h:selectOneMenu class="form-control" id="ciudadesId" value="#{controladorCrearMascota.mascota.ciudadesId}" title="CiudadesId" required="true" requiredMessage="The CiudadesId field is required.">
-                <f:selectItems value="#{controladorCrearMascota.listaCiudades}" var="listaCiudades" itemLabel="#{listaCiudades.nombre}"/>
-            </h:selectOneMenu>
-            </div>
-            <div class="form-group">
-                <h:outputLabel value="Imagen:" for="imagen" />
-                <h:inputFile id="fileUpload" pt:multiple="false">
-                    <f:validator validatorId="fileUploadValidator"/>
-                </h:inputFile>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-3 col-sm-3">
-                    <h:commandButton value="cancelar" class="btn btn-default" action="/core/mascota/listarMascotas.xhtml?faces-redirect=true" immediate="true"></h:commandButton>
-                </div>
-                <div class="col-sm-3">
-                    <h:commandButton value="aceptar" class="btn btn-primary" action="#{controladorCrearMascota.upload()}"></h:commandButton>
+        <h:panelGroup rendered="#{controladorLogin.usuarioSesion.rolesId.id != 5}">
+            <b:messages show-detail="true" show-summary="true"></b:messages>
+            <div class="panel-heading">
+                <div class="panel-title"><h2>Ingresar nueva mascota</h2></div>
+                <div class="panel-options">
                 </div>
             </div>
+            <br></br><br></br><br></br>
 
-        </h:form>
+            <h:form enctype="multipart/form-data" id="form" prependId="false">
 
+                <div class="form-group">
+                    <h:outputLabel value="Nombres:" for="nombres" />
+                    <h:inputText class="form-control" id="nombre" value="#{controladorCrearMascota.mascota.nombre}" title="Nombre" />
+                </div>
+                <div class="form-group">
+                    <h:outputLabel value="Edad:" for="edad" />
+                    <h:inputText class="form-control" id="edad" value="#{controladorCrearMascota.mascota.edad}" title="Edad" />
+                </div>
+                <div class="form-group">
+                    <h:outputLabel value="Descripcion:" for="descripcion" />
+                    <h:inputText class="form-control" id="descripcion" value="#{controladorCrearMascota.mascota.descripcion}" title="Descripcion" />
+                </div>
+                <div class="form-group">
+                    <h:outputLabel value="TipoMascota:" for="tipoMascota" />
+                    <h:selectOneMenu class="form-control" id="tipoMascota" value="#{controladorCrearMascota.mascota.tipoMascota}" title="tipoMascota" required="true" requiredMessage="The tipoMascota field is required.">
+                        <f:selectItem itemValue="perro" itemLabel="perro"/>
+                        <f:selectItem itemValue="gato" itemLabel="gato"/>
+                    </h:selectOneMenu>
+                </div>
+                <div class="form-group">
+                    <h:outputLabel value="CiudadesId:" for="ciudadesId" />
+                    <h:selectOneMenu class="form-control" id="ciudadesId" value="#{controladorCrearMascota.mascota.ciudadesId}" title="CiudadesId" required="true" requiredMessage="The CiudadesId field is required.">
+                        <f:selectItems value="#{controladorCrearMascota.listaCiudades}" var="listaCiudades" itemLabel="#{listaCiudades.nombre}"/>
+                    </h:selectOneMenu>
+                </div>
+                <div class="form-group">
+                    <h:outputLabel value="Imagen:" for="imagen" />
+                    <h:inputFile id="fileUpload" pt:multiple="false">
+                        <f:validator validatorId="fileUploadValidator"/>
+                    </h:inputFile>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-3">
+                        <h:commandButton value="cancelar" class="btn btn-default" action="/core/mascota/listarMascotas.xhtml?faces-redirect=true" immediate="true"></h:commandButton>
+                    </div>
+                    <div class="col-sm-3">
+                        <h:commandButton value="aceptar" class="btn btn-primary" action="#{controladorCrearMascota.upload()}"></h:commandButton>
+                    </div>
+                </div>
+
+            </h:form>
+        </h:panelGroup>
     </ui:define>
 
     <!--Scripts adicionales si son necesarios-->
