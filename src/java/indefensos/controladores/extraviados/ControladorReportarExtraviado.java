@@ -6,7 +6,9 @@
 package indefensos.controladores.extraviados;
 
 import indefensos.controladores.adoptado.*;
+import indefensos.controladores.email.MailController;
 import indefensos.controladores.login.ControladorLogin;
+import indefensos.controladores.mail.Mailer;
 import indefensos.modelo.dao.EstadoMascotaFacade;
 import indefensos.modelo.dao.MascotaFacade;
 import indefensos.modelo.dao.ProcesoFacade;
@@ -15,6 +17,7 @@ import indefensos.modelo.entidades.Mascota;
 import indefensos.modelo.entidades.Proceso;
 import indefensos.modelo.entidades.Rol;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -80,6 +83,14 @@ public class ControladorReportarExtraviado implements Serializable {
     }
 
     public String reportarMascota() {
+        MailController mc = new MailController();
+        /*String mensaje = "<h1>" + respuesta + "<h1><br/>"
+                + "<h2>resumen del envio:<h2>"
+                + "<h3>Nombre del remitente: " + controladorLogin.getUsuarioSesion().getNombres() + " " + controladorLogin.getUsuarioSesion().getApellidos() + "<br/>"
+                + "fecha de la cita: " + fecha + "<h3><br/>"
+                + "<h4>Indefendos " + Calendar.getInstance().get(Calendar.YEAR) + "</h4>";
+
+        mc.enviarEmailCliente(procesoSeleccionado.getMascotasId().getDueñoId().getEmail(), "Respuesta extraviado", procesoSeleccionado.getRespuesta());*/
         //procesoSeleccionado.setIsAutorizado(1);
         procesoSeleccionado.setUsuariosId(controladorLogin.getUsuarioSesion());
         procesoFacade.edit(procesoSeleccionado);

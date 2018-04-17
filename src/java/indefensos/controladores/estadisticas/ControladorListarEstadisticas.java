@@ -28,10 +28,7 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 
-/**
- *
- * @author David
- */
+
 @Named(value = "controladorListarEstadisticas")
 @ViewScoped
 public class ControladorListarEstadisticas implements Serializable {
