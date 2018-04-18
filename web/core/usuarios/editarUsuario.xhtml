@@ -26,6 +26,7 @@
 
     <!--contenido principal de la pagina-->
     <ui:define name="mainContent">
+        <h:panelGroup rendered="#{controladorLogin.usuarioSesion.rolesId.id == 5}">
         <b:messages show-detail="true" show-summary="true"></b:messages>
         <div class="panel-heading">
             <div class="panel-title"><h2>Editar usuario</h2></div>
@@ -34,62 +35,61 @@
         </div>
         <br></br><br></br><br></br>
 
+            <h:form>
 
-        <h:form>
-
-            <div class="form-group">
-                <h:outputLabel value="Nombres:" for="nombres" />
-                <h:inputText class="form-control" id="nombres" value="#{controladorEditarUsuarios.usuarioSeleccionado.nombres}" title="Nombres" />
-            </div>
-            <div class="form-group">
-                <h:outputLabel value="Apellidos:" for="apellidos" />
-                <h:inputText class="form-control" id="apellidos" value="#{controladorEditarUsuarios.usuarioSeleccionado.apellidos}" title="Apellidos" />
-            </div>
-            <div class="form-group">
-                <h:outputLabel value="Documento:" for="documento" />
-                <h:inputText class="form-control" id="documento" value="#{controladorEditarUsuarios.usuarioSeleccionado.documento}" title="Documento" />
-            </div>
-            <div class="form-group">
-                <h:outputLabel value="FechaNacimiento:" for="fechaNacimiento" />
-                <b:dateTimePicker id="fechaNacimiento" value="#{controladorEditarUsuarios.usuarioSeleccionado.fechaNacimiento}" mode="popup" format="YYYY/MM/DD">
-                </b:dateTimePicker>
-            </div>
-
-            <div class="form-group">
-                <h:outputLabel value="Email:" for="email" />
-                <h:inputText class="form-control" id="email" value="#{controladorEditarUsuarios.usuarioSeleccionado.email}" title="Email" />
-            </div>
-            <div class="form-group">
-                <h:outputLabel value="Clave:" for="clave" />
-                <h:inputText class="form-control" id="clave" value="#{controladorEditarUsuarios.usuarioSeleccionado.clave}" title="Clave" />
-            </div>
-
-            <div class="form-group">
-                <h:outputLabel value="Estado:" for="estado" />
-                <h:selectOneMenu class="form-control" id="estado" value="#{controladorEditarUsuarios.usuarioSeleccionado.estado}" title="CiudadesId" required="true" requiredMessage="The CiudadesId field is required.">
-                    <f:selectItem  itemValue="0" itemLabel="Activo"/>
-                    <f:selectItem  itemValue="1" itemLabel="Inactivo"/>
-                </h:selectOneMenu>
-            </div>
-
-            <div class="form-group">
-                <h:outputLabel value="CiudadesId:" for="ciudadesId" />
-                <h:selectOneMenu class="form-control" id="ciudadesId" value="#{controladorEditarUsuarios.usuarioSeleccionado.ciudadesId}" title="CiudadesId" required="true" requiredMessage="The CiudadesId field is required.">
-                    <f:selectItems value="#{controladorEditarUsuarios.listaCiudades}" var="listaCiudades" itemLabel="#{listaCiudades.nombre}"/>
-                </h:selectOneMenu>
-            </div>
-            
-            <div class="form-group">
-                <div class="col-sm-offset-3 col-sm-3">
-                    <h:commandButton value="cancelar" class="btn btn-default" action="#{controladorEditarUsuarios.cancelar()}"></h:commandButton>
+                <div class="form-group">
+                    <h:outputLabel value="Nombres:" for="nombres" />
+                    <h:inputText class="form-control" id="nombres" value="#{controladorEditarUsuarios.usuarioSeleccionado.nombres}" title="Nombres" />
                 </div>
-                <div class="col-sm-3">
-                    <h:commandButton value="aceptar" class="btn btn-primary" action="#{controladorEditarUsuarios.editar()}"></h:commandButton>
+                <div class="form-group">
+                    <h:outputLabel value="Apellidos:" for="apellidos" />
+                    <h:inputText class="form-control" id="apellidos" value="#{controladorEditarUsuarios.usuarioSeleccionado.apellidos}" title="Apellidos" />
                 </div>
-            </div>
+                <div class="form-group">
+                    <h:outputLabel value="Documento:" for="documento" />
+                    <h:inputText class="form-control" id="documento" value="#{controladorEditarUsuarios.usuarioSeleccionado.documento}" title="Documento" />
+                </div>
+                <div class="form-group">
+                    <h:outputLabel value="FechaNacimiento:" for="fechaNacimiento" />
+                    <b:dateTimePicker id="fechaNacimiento" value="#{controladorEditarUsuarios.usuarioSeleccionado.fechaNacimiento}" mode="popup" format="YYYY/MM/DD">
+                    </b:dateTimePicker>
+                </div>
 
-        </h:form>
+                <div class="form-group">
+                    <h:outputLabel value="Email:" for="email" />
+                    <h:inputText class="form-control" id="email" value="#{controladorEditarUsuarios.usuarioSeleccionado.email}" title="Email" />
+                </div>
+                <div class="form-group">
+                    <h:outputLabel value="Clave:" for="clave" />
+                    <h:inputText class="form-control" id="clave" value="#{controladorEditarUsuarios.usuarioSeleccionado.clave}" title="Clave" />
+                </div>
 
+                <div class="form-group">
+                    <h:outputLabel value="Estado:" for="estado" />
+                    <h:selectOneMenu class="form-control" id="estado" value="#{controladorEditarUsuarios.usuarioSeleccionado.estado}" title="CiudadesId" required="true" requiredMessage="The CiudadesId field is required.">
+                        <f:selectItem  itemValue="0" itemLabel="Activo"/>
+                        <f:selectItem  itemValue="1" itemLabel="Inactivo"/>
+                    </h:selectOneMenu>
+                </div>
+
+                <div class="form-group">
+                    <h:outputLabel value="CiudadesId:" for="ciudadesId" />
+                    <h:selectOneMenu class="form-control" id="ciudadesId" value="#{controladorEditarUsuarios.usuarioSeleccionado.ciudadesId}" title="CiudadesId" required="true" requiredMessage="The CiudadesId field is required.">
+                        <f:selectItems value="#{controladorEditarUsuarios.listaCiudades}" var="listaCiudades" itemLabel="#{listaCiudades.nombre}"/>
+                    </h:selectOneMenu>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-3">
+                        <h:commandButton value="cancelar" class="btn btn-default" action="#{controladorEditarUsuarios.cancelar()}"></h:commandButton>
+                    </div>
+                    <div class="col-sm-3">
+                        <h:commandButton value="aceptar" class="btn btn-primary" action="#{controladorEditarUsuarios.editar()}"></h:commandButton>
+                    </div>
+                </div>
+
+            </h:form>
+        </h:panelGroup>
     </ui:define>
 
     <!--Scripts adicionales si son necesarios-->

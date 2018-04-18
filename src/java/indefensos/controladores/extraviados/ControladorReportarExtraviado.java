@@ -44,6 +44,7 @@ public class ControladorReportarExtraviado implements Serializable {
     private List<EstadoMascota> listaEstadosMascotas;
     private Mascota mascotaSeleccionada;
     private Proceso procesoSeleccionado;
+    private String respuesta = "";
 
     public ControladorReportarExtraviado() {
     }
@@ -51,6 +52,14 @@ public class ControladorReportarExtraviado implements Serializable {
     @PostConstruct
     public void init() {
 
+    }
+
+    public String getRespuesta() {
+        return respuesta;
+    }
+
+    public void setRespuesta(String respuesta) {
+        this.respuesta = respuesta;
     }
 
     public List<EstadoMascota> getListaEstadosMascotas() {
@@ -84,15 +93,18 @@ public class ControladorReportarExtraviado implements Serializable {
 
     public String reportarMascota() {
         MailController mc = new MailController();
-        /*String mensaje = "<h1>" + respuesta + "<h1><br/>"
-                + "<h2>resumen del envio:<h2>"
-                + "<h3>Nombre del remitente: " + controladorLogin.getUsuarioSesion().getNombres() + " " + controladorLogin.getUsuarioSesion().getApellidos() + "<br/>"
-                + "fecha de la cita: " + fecha + "<h3><br/>"
-                + "<h4>Indefendos " + Calendar.getInstance().get(Calendar.YEAR) + "</h4>";
-
-        mc.enviarEmailCliente(procesoSeleccionado.getMascotasId().getDueñoId().getEmail(), "Respuesta extraviado", procesoSeleccionado.getRespuesta());*/
-        //procesoSeleccionado.setIsAutorizado(1);
         procesoSeleccionado.setUsuariosId(controladorLogin.getUsuarioSesion());
+        String mensaje = "<h1>Notificacion reporte mascota<h1><br/>"
+                + "<h2>El usuario " + procesoSeleccionado.getUsuariosId().getNombres() + " " + procesoSeleccionado.getUsuariosId().getNombres() + " ha reportado su mascota<h2><br/>"
+                + "<h3>Le solicitamos que se comunique con el usuario y valide la informacion en el sistema para actualizar el estado de su mascota<br/>"
+                + "Datos del usuario que reporto a la mascota:<br/>"
+                + "nombre: " + procesoSeleccionado.getUsuariosId().getNombres() + " " + procesoSeleccionado.getUsuariosId().getApellidos() + "<br/>"
+                + "email: " + procesoSeleccionado.getUsuariosId().getEmail() + "<br/>"
+                + "</h3><br/>"
+                + "<h4>Indefendos " + Calendar.getInstance().get(Calendar.YEAR) + "</h4>";
+        mc.enviarEmailCliente(procesoSeleccionado.getMascotasId().getDueñoId().getEmail(), "Respuesta extraviado", mensaje);
+        
+        //procesoSeleccionado.setIsAutorizado(1);
         procesoFacade.edit(procesoSeleccionado);
         return "/core/extraviados/listarExtraviados.xhtml?faces-redirect=true";
 

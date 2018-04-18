@@ -28,7 +28,7 @@
     <ui:define name="mainContent">
         <b:messages show-detail="true" show-summary="true"></b:messages>
         <div class="panel-heading">
-            <div class="panel-title"><h2>Usuarios registrados</h2></div>
+            <div class="panel-title"><h2>Citas registradas</h2></div>
             <div class="panel-options">
                 <h:panelGroup rendered="#{controladorLogin.usuarioSesion.rolesId.id != 5}">
                     <span><h:link outcome="/core/citas/crearCita.xhtml?faces-redirect=true" value="ingresar nueva cita">&nbsp;<i class="glyphicon glyphicon-plus"></i></h:link></span>
@@ -38,77 +38,77 @@
         <br></br><br></br><br></br>
 
         <h:form>
+            <div class="table-responsive">
+                <b:dataTable value="#{controladorListarMensajes.listaCitas}" var="item">
 
-            <b:dataTable value="#{controladorListarMensajes.listaCitas}" var="item">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Id"/>
+                        </f:facet>
+                        <h:outputText value="#{item.id}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Asunto"/>
+                        </f:facet>
+                        <h:outputText value="#{item.asunto}"/>
+                    </h:column>
+                    <h:column rendered="#{controladorLogin.usuarioSesion.rolesId.id != 5}">
+                        <f:facet name="header">
+                            <h:outputText value="Leida"/>
+                        </f:facet>
+                        <h:outputText value="#{(item.isLeida == 1 ? 'si':'no')}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Mensaje"/>
+                        </f:facet>
+                        <h:outputText value="#{item.mensaje}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Usuarios"/>
+                        </f:facet>
+                        <h:outputText value="#{item.usuariosId.nombres} #{item.usuariosId.apellidos}"/>
+                    </h:column>
+                    <h:column rendered="#{controladorLogin.usuarioSesion.rolesId.id == 5}">
+                        <f:facet name="header">
+                            <h:outputText value="opciones"/>
+                        </f:facet>
+                        <h:commandButton id="proceso" class="btnModal1 btn btn-primary"  value="responder" rendered="#{item.isLeida == 0}">
+                            <f:ajax event="click" execute="responder" listener="#{controladorResponderCita.prepararCita(item)}" render="content-modal-eliminar1"></f:ajax>
+                        </h:commandButton>
+                    </h:column>
+                </b:dataTable>
 
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Id"/>
-                    </f:facet>
-                    <h:outputText value="#{item.id}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Asunto"/>
-                    </f:facet>
-                    <h:outputText value="#{item.asunto}"/>
-                </h:column>
-                <h:column rendered="#{controladorLogin.usuarioSesion.rolesId.id != 5}">
-                    <f:facet name="header">
-                        <h:outputText value="Leida"/>
-                    </f:facet>
-                    <h:outputText value="#{(item.isLeida == 1 ? 'si':'no')}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Mensaje"/>
-                    </f:facet>
-                    <h:outputText value="#{item.mensaje}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Usuarios"/>
-                    </f:facet>
-                    <h:outputText value="#{item.usuariosId.nombres} #{item.usuariosId.apellidos}"/>
-                </h:column>
-                <h:column rendered="#{controladorLogin.usuarioSesion.rolesId.id == 5}">
-                    <f:facet name="header">
-                        <h:outputText value="opciones"/>
-                    </f:facet>
-                    <h:commandButton id="proceso" class="btnModal1 btn btn-primary"  value="reportar" rendered="#{item.isLeida == 0}">
-                        <f:ajax event="click" execute="responder" listener="#{controladorResponderCita.prepararCita(item)}" render="content-modal-eliminar1"></f:ajax>
-                    </h:commandButton>
-                </h:column>
-            </b:dataTable>
+                <div id="myModal1" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <h:panelGroup id="content-modal-eliminar1" layout="block" class="modal-content">
 
-            <div id="myModal1" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-                    <h:panelGroup id="content-modal-eliminar1" layout="block" class="modal-content">
-
-                        <!-- Modal content-->
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Rensponder cita a: #{controladorResponderCita.citaSeleccionada.usuariosId.nombres} #{controladorResponderCita.citaSeleccionada.usuariosId.apellidos}</h4>
-                        </div>
-
-                        <div class="modal-body form-group col-lg-12">
-                            <div class="form">
-                                mensaje al dueño: <h:inputTextarea value="#{controladorResponderCita.respuesta}" />
+                            <!-- Modal content-->
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Rensponder cita a: #{controladorResponderCita.citaSeleccionada.usuariosId.nombres} #{controladorResponderCita.citaSeleccionada.usuariosId.apellidos}</h4>
                             </div>
-                            <div class="form">
-                                mensaje al dueño:<b:dateTimePicker  id="fechaNacimiento" value="#{controladorResponderCita.d}" mode="popup" show-time="true" show-date="true"/>
+
+                            <div class="modal-body form-group col-lg-12">
+                                <div class="form">
+                                    mensaje al dueño: <h:inputTextarea value="#{controladorResponderCita.respuesta}" />
+                                </div>
+                                <div class="form">
+                                    mensaje al dueño:<b:dateTimePicker  id="fechaNacimiento" value="#{controladorResponderCita.d}" mode="popup" show-time="true" show-date="true"/>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="modal-footer">
-                            <h:commandButton class="btn btn-primary" value="aceptar" action="#{controladorResponderCita.responder()}"></h:commandButton>
-                        </div>
+                            <div class="modal-footer">
+                                <h:commandButton class="btn btn-primary" value="aceptar" action="#{controladorResponderCita.responder()}"></h:commandButton>
+                            </div>
 
-                    </h:panelGroup>
+                        </h:panelGroup>
+                    </div>
                 </div>
+
             </div>
-
-
         </h:form>
 
     </ui:define>

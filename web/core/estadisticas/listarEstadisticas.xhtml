@@ -24,18 +24,20 @@
 
     <!--contenido principal de la pagina-->
     <ui:define name="mainContent">
-        <div id="canvas-holder" style="width:40%">
-            <canvas id="chartjs-1" width="400" height="400"></canvas>
-            <button type="button" id="download-pdf1" >
-                importar a pdf
-            </button>
-        </div>
-        <div id="canvas-holder" style="width:40%">
-            <canvas id="chartjs-2" width="400" height="400"></canvas>
-            <button type="button" id="download-pdf2" >
-                importar a pdf
-            </button>
-        </div>
+        <h:panelGroup rendered="#{controladorLogin.usuarioSesion.rolesId.id == 5}">
+            <div id="canvas-holder" style="width:40%">
+                <canvas id="chartjs-1" width="400" height="400"></canvas>
+                <button type="button" id="download-pdf1" >
+                    importar a pdf
+                </button>
+            </div>
+            <div id="canvas-holder" style="width:40%">
+                <canvas id="chartjs-2" width="400" height="400"></canvas>
+                <button type="button" id="download-pdf2" >
+                    importar a pdf
+                </button>
+            </div>
+        </h:panelGroup>
     </ui:define>
 
     <!--Scripts adicionales si son necesarios-->

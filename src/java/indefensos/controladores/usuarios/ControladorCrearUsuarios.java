@@ -5,6 +5,7 @@
  */
 package indefensos.controladores.usuarios;
 
+import indefensos.controladores.login.ControladorLogin;
 import indefensos.modelo.dao.CiudadFacade;
 import indefensos.modelo.dao.RolFacade;
 import indefensos.modelo.dao.UsuarioFacade;
@@ -16,8 +17,10 @@ import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 
 /**
  *
@@ -33,6 +36,8 @@ public class ControladorCrearUsuarios implements Serializable {
     private RolFacade rolFacade;
     @EJB
     private CiudadFacade ciudadFacade;
+    @Inject
+    private ControladorLogin controladorLogin;
     private List<Rol> listaRoles;
     private List<Ciudad> listaCiudades;
     private Usuario usuario;
@@ -72,12 +77,12 @@ public class ControladorCrearUsuarios implements Serializable {
         this.usuario = usuario;
     }
 
-    public String crear(){
+    public String crear() {
         usuario.setRolesId(new Rol(6));
         usuario.setFechaRegistro(new Date());
         usuarioFacade.create(usuario);
         return "/core/usuarios/listarUsuarios.xhtml?faces-redirect=true";
-        
+
     }
 
 }
