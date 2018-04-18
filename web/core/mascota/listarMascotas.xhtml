@@ -106,6 +106,7 @@
                     <h:commandButton id="proceso" class="btnModal1 btn btn-primary"  value="Proceso" rendered="#{item.hasProceso == 0}">
                         <f:ajax event="click" execute="proceso" listener="#{controladorIniciarProcesoMascota.prepararProceso(item)}" render="content-modal-eliminar"></f:ajax>
                     </h:commandButton>
+                    <h:commandButton value="certificado" class="btn btn-primary" action="#{controladorListarMascotas.exportarPDF(item)}"></h:commandButton>
                 </h:column>
             </b:dataTable>
 
